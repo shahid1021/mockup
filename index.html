@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heart Button Page</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: repeating-linear-gradient(45deg, #ffcccc, #ff6666 10px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .heart-button {
+            width: 100px;
+            height: 90px;
+            background: #007BFF;
+            position: relative;
+            transform: rotate(-45deg);
+            margin: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: none;
+            outline: none;
+        }
+
+        .heart-button::before, .heart-button::after {
+            content: '';
+            width: 100px;
+            height: 100px;
+            background: #007BFF;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .heart-button::before { top: -50px; left: 0; }
+        .heart-button::after { left: 50px; top: 0; }
+
+        .heart-button span {
+            color: white;
+            font-size: 16px;
+            transform: rotate(45deg);
+            font-weight: bold;
+        }
+
+        .center-image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: 300px;
+            max-height: 300px;
+            display: none;
+        }
+
+        .heart, .flower, .moon {
+            position: absolute;
+            font-size: 24px;
+            opacity: 0;
+            animation: float 5s infinite ease-in-out;
+        }
+
+        .moon {
+            font-size: 50px;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: moonGlow 3s infinite alternate ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); opacity: 1; }
+            50% { opacity: 0.7; }
+            100% { transform: translateY(-100vh); opacity: 0; }
+        }
+
+        @keyframes moonGlow {
+            0% { opacity: 0.7; }
+            100% { opacity: 1; }
+        }
+
+        .heart-animate {
+            position: absolute;
+            font-size: 30px;
+            color: red;
+            animation: heartInOut 2s infinite alternate ease-in-out;
+        }
+
+        @keyframes heartInOut {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(1.5); opacity: 0.5; }
+        }
+    </style>
+</head>
+<body>
+    <script>
+        function createHeartAnimation() {
+            for (let i = 0; i < 20; i++) {
+                let heart = document.createElement('div');
+                heart.className = 'heart-animate';
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = Math.random() * 100 + 'vh';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 4000);
+            }
+        }
+
+        setInterval(createHeartAnimation, 2000);
+    </script>
+
+    <button class="heart-button" onclick="showImage()">
+        <span>Enter</span>
+    </button>
+    <img src="file:///C:/Users/sha88/Desktop/teddy.webp" class="center-image" id="teddyImage" alt="Teddy Bear">
+    
+    <script>
+        function showImage() {
+            document.body.style.background = "url('https://source.unsplash.com/1600x900/?flowers') no-repeat center center/cover";
+            document.getElementById('teddyImage').style.display = 'block';
+            createAnimations();
+        }
+
+        function createAnimations() {
+            for (let i = 0; i < 30; i++) {
+                let heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '❤️';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = Math.random() * 100 + 'vh';
+                heart.style.fontSize = Math.random() * 30 + 10 + 'px';
+                heart.style.animationDuration = Math.random() * 5 + 3 + 's';
+                document.body.appendChild(heart);
+                setTimeout(() => heart.remove(), 8000);
+            }
+            
+            for (let i = 0; i < 30; i++) {
+                let flower = document.createElement('div');
+                flower.className = 'flower';
+                flower.innerHTML = '🌸';
+                flower.style.left = Math.random() * 100 + 'vw';
+                flower.style.top = Math.random() * 100 + 'vh';
+                flower.style.fontSize = Math.random() * 30 + 10 + 'px';
+                flower.style.animationDuration = Math.random() * 5 + 3 + 's';
+                document.body.appendChild(flower);
+                setTimeout(() => flower.remove(), 8000);
+            }
+            
+            let moon = document.createElement('div');
+            moon.className = 'moon';
+            moon.innerHTML = '🌙';
+            document.body.appendChild(moon);
+        }
+    </script>
+</body>
+</html>
